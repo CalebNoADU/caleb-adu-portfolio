@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OctoCrystal Sanctum — HD-2D JRPG Roguelike</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar ff-window">
+        <div class="brand">
+          <h1>❖ OCTOCRYSTAL SANCTUM</h1>
+          <span class="subtitle">Octopath Break &amp; Boost × Final Fantasy IV/V/VI Job Roguelike</span>
+        </div>
+        <div class="status-pills">
+          <span id="floor-badge" class="badge">Floor 1/3</span>
+          <span id="mode-badge" class="badge">EXPLORE</span>
+        </div>
+        <div class="seed-controls">
+          <label for="seed-input">RNG Seed:</label>
+          <input id="seed-input" type="text" value="OCTOPATH-FF6" />
+          <button id="new-run-btn" class="ff-btn">New Seeded Run</button>
+        </div>
+      </header>
+
+      <div id="relics-bar" class="relics-bar ff-window"></div>
+
+      <main class="main-grid">
+        <section class="viewport-column">
+          <div class="canvas-frame ff-window">
+            <canvas id="game-canvas" width="792" height="448"></canvas>
+          </div>
+          <div id="command-panel" class="command-panel ff-window"></div>
+        </section>
+
+        <aside class="sidebar-column">
+          <div class="party-window ff-window">
+            <h2>Party &amp; FF5 Jobs</h2>
+            <div id="party-list" class="party-list"></div>
+          </div>
+
+          <div class="log-window ff-window">
+            <h2>Sanctum Chronicle</h2>
+            <div id="battle-log" class="battle-log"></div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./game.js"></script>
+  </body>
+</html>

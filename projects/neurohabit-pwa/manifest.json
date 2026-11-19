@@ -1,0 +1,19 @@
+{
+  "name": "NeuroHabit Daily Protocol",
+  "short_name": "NeuroHabit",
+  "description": "Evidence-based daily neuroscience & health protocol tracker (9 metrics, circadian-safe dark UI, 100% offline).",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

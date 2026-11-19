@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caleb Adu — Computer Science &amp; Systems Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --surface: #121826;
+      --surface-hover: #182135;
+      --border: #23304a;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.14);
+      --green: #34d399;
+      --green-soft: rgba(52, 211, 153, 0.14);
+      --amber: #fbbf24;
+      --amber-soft: rgba(251, 191, 36, 0.14);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: radial-gradient(circle at top right, #14213d 0%, var(--bg) 52%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    header.hero {
+      padding: 36px 32px;
+      background: linear-gradient(145deg, rgba(24, 33, 53, 0.9), rgba(18, 24, 38, 0.95));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 22px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-pill {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      background: var(--surface-hover);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-live {
+      color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .badge-sys {
+      color: var(--amber);
+      background: var(--amber-soft);
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 8px 0 14px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 0.74rem;
+      color: #93c5fd;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 15px;
+      border-radius: 9px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn:hover { opacity: 0.92; }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #06121e;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .art-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      image-rendering: pixelated;
+      background: #161d18;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .art-caption {
+      padding: 14px 16px;
+    }
+
+    .art-caption strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .art-caption span {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">Computer Science · Embedded Systems · Creative Engineering</div>
+      <h1>Caleb Adu</h1>
+      <p>
+        MSc Computer Science student at Queen Mary University of London (BA Economics &amp; Management, 2:1) and Technical Specialist at Apple.
+        Explore interactive browser demos of my software engineering projects alongside low-level Game Boy Advance (ARM7TDMI) C engine modules, database vector-retrieval labs, and brutalist pixel-art architecture.
+      </p>
+      <div class="hero-pills">
+        <span class="skill-pill">Python &amp; FastAPI</span>
+        <span class="skill-pill">Embedded C (ARM7TDMI)</span>
+        <span class="skill-pill">MySQL 26.x &amp; Native VECTOR</span>
+        <span class="skill-pill">JavaScript &amp; Offline PWAs</span>
+        <span class="skill-pill">Procedural Game Algorithms</span>
+        <span class="skill-pill">4bpp Tileset Engineering</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <h2>Interactive Live Demos</h2>
+        <span>Click any project to launch it immediately in your browser</span>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <h3>OctoCrystal Sanctum</h3>
+              <span class="badge badge-live">Live Playable</span>
+            </div>
+            <p>
+              Deterministic seeded HD-2D JRPG roguelike combining Octopath Break &amp; Boost tactical combat with Final Fantasy V-style Job switching, BFS-verified dungeon generation, and shadowcasting FOV.
+            </p>
+            <div class="tags">
+              <span class="tag">Vanilla JS</span>
+              <span class="tag">HTML5 Canvas</span>
+              <span class="tag">BFS &amp; FOV</span>
+              <span class="tag">Node.js Test Suite</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="./projects/octocrystal-sanctum/index.html">Play Live Demo</a>
+            <a class="btn btn-secondary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/tree/main/projects/octocrystal-sanctum" target="_blank" rel="noopener">Source Code</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <h3>NeuroHabit Protocol PWA</h3>
+              <span class="badge badge-live">Live PWA</span>
+            </div>
+            <p>
+              Offline-first Progressive Web App featuring a Service Worker cache strategy, dynamic day-of-week &amp; 4-phase habit engine, hydration tracker, and an animated 5-minute Cyclic Physiological Sigh breathing coach.
+            </p>
+            <div class="tags">
+              <span class="tag">PWA</span>
+              <span class="tag">Service Worker</span>
+              <span class="tag">localStorage</span>
+              <span class="tag">Vibration API</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="./projects/neurohabit-pwa/index.html">Open Web App</a>
+            <a class="btn btn-secondary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/tree/main/projects/neurohabit-pwa" target="_blank" rel="noopener">Source Code</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <h3>JoyBooks Semantic Search</h3>
+              <span class="badge badge-live">Live Preview</span>
+            </div>
+            <p>
+              Semantic passage retrieval across 11,992 classic literature paragraphs using 1,500-dimensional IDF-weighted word embeddings and cosine similarity, paired with a zero-dependency Python CLI engine.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">NLP Embeddings</span>
+              <span class="tag">Cosine Similarity</span>
+              <span class="tag">Web UI</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="./projects/joybooks-semantic-search/web/index.html">Try Search Preview</a>
+            <a class="btn btn-secondary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/blob/main/projects/joybooks-semantic-search/search_engine.py" target="_blank" rel="noopener">Python Engine</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <h3>Tic-Tac-Toe AI Suite</h3>
+              <span class="badge badge-live">Live Playable</span>
+            </div>
+            <p>
+              Unbeatable Minimax AI built across three architectures: a dark-mode browser client (Easy / Medium / Unbeatable + 2-Player), a Python FastAPI REST service, and a Tkinter Desktop / CLI app.
+            </p>
+            <div class="tags">
+              <span class="tag">Minimax AI</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Tkinter / CLI</span>
+              <span class="tag">HTML/CSS/JS</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="./projects/tic-tac-toe-ai/web/index.html">Play vs. AI</a>
+            <a class="btn btn-secondary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/blob/main/projects/tic-tac-toe-ai/backend/main.py" target="_blank" rel="noopener">FastAPI Code</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <h3>Pulse Habit Tracker</h3>
+              <span class="badge badge-live">Live App</span>
+            </div>
+            <p>
+              Minimalist client-side habit and streak tracker with a dynamic SVG daily progress ring, 14-day interactive completion matrix, and HTML5 Canvas confetti celebrations.
+            </p>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">SVG Animation</span>
+              <span class="tag">HTML5 Canvas</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="./projects/pulse-habit-tracker/index.html">Open Tracker</a>
+            <a class="btn btn-secondary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/tree/main/projects/pulse-habit-tracker" target="_blank" rel="noopener">Source Code</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Systems, Embedded C &amp; Database Engineering</h2>
+        <span>Low-level C modules, SQL internals, and architecture writeups</span>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <h3>Project GMK — GBA ARM7TDMI Engine</h3>
+              <span class="badge badge-sys">Embedded C</span>
+            </div>
+            <p>
+              Original C modules implementing true roguelike permadeath with checksummed Flash Sector 31 meta-persistence (<code>gmk_permadeath.c</code>), bounty enlistment UI (<code>gmk_bounty.c</code>), an ARM out-of-bounds crash postmortem, and 2.16s 12-core builds.
+            </p>
+            <div class="tags">
+              <span class="tag">ARM7TDMI C</span>
+              <span class="tag">Flash Persistence</span>
+              <span class="tag">Crash Debugging</span>
+              <span class="tag">Build Optimization</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/blob/main/projects/project-gmk-gba-engine/src/gmk_permadeath.c" target="_blank" rel="noopener">Read Permadeath C</a>
+            <a class="btn btn-secondary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/blob/main/projects/project-gmk-gba-engine/docs/architecture-and-postmortem.md" target="_blank" rel="noopener">Postmortem</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <h3>MySQL 26.x Native VECTOR &amp; DualRAG Lab</h3>
+              <span class="badge badge-sys">Databases / RAG</span>
+            </div>
+            <p>
+              Isolated local MySQL sandbox script plus 4-stage SQL labs covering InnoDB B+Tree indexing, <code>EXPLAIN</code> diagnostics, a deterministic SQL <code>DISTANCE()</code> polyfill on native <code>VECTOR(8)</code> columns, and pure-SQL JSON RAG prompt assembly.
+            </p>
+            <div class="tags">
+              <span class="tag">MySQL 26.x</span>
+              <span class="tag">VECTOR(8)</span>
+              <span class="tag">Hybrid DualRAG</span>
+              <span class="tag">InnoDB Indexing</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/blob/main/projects/mysql-vector-rag-sandbox/sql/stage4_ai_vectors_rag.sql" target="_blank" rel="noopener">Inspect DualRAG SQL</a>
+            <a class="btn btn-secondary" href="https://github.com/CalebNoADU/caleb-adu-portfolio/blob/main/projects/mysql-vector-rag-sandbox/sql/ai_vector_setup.sql" target="_blank" rel="noopener">DISTANCE() Polyfill</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Content Creation &amp; Visual Architecture Gallery (Project GMK)</h2>
+        <span>4-shade DMG brutalist overworld &amp; 8×8 4bpp hardware tileset progression</span>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="art-card">
+          <img src="./projects/project-gmk-gba-engine/assets/gmk-concept-early.png" alt="Early GMK overworld layout concept" />
+          <figcaption class="art-caption">
+            <strong>1. Early Brutalist Concept</strong>
+            <span>Initial spatial blockout establishing sightlines and industrial silhouette framing.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="art-card">
+          <img src="./projects/project-gmk-gba-engine/assets/overworld-brutalist-redesign.png" alt="Detailed brutalist overworld redesign" />
+          <figcaption class="art-caption">
+            <strong>2. Overworld Master Redesign</strong>
+            <span>9-slice curbs, cobblestone plaza fountain, corrugated factory roofs &amp; utility clutter in 4 DMG shades.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="art-card">
+          <img src="./projects/project-gmk-gba-engine/assets/interior-full-room-208x160.png" alt="208x160 brutalist interior room" />
+          <figcaption class="art-caption">
+            <strong>3. Interior Architecture (208×160)</strong>
+            <span>Hardware-accurate interior compiled from a custom 16-color 4bpp 8×8 indexed tileset.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer>
+      <span>&copy; 2026 Caleb Adu · Built with zero framework bloat</span>
+      <span><a href="https://github.com/CalebNoADU/caleb-adu-portfolio" target="_blank" rel="noopener">View Repository on GitHub &rarr;</a></span>
+    </footer>
+  </div>
+</body>
+</html>

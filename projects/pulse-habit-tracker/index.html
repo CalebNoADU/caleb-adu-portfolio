@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse — Habit Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <main class="app-shell">
+    <!-- Top Header & Daily Ring -->
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-title-row">
+          <span class="brand-dot"></span>
+          <h1>Pulse Habits</h1>
+        </div>
+        <p class="subtitle" id="today-date-label">Loading date...</p>
+      </div>
+
+      <div class="summary-cards">
+        <div class="ring-card">
+          <svg class="progress-ring" width="64" height="64" viewBox="0 0 64 64">
+            <circle class="ring-bg" cx="32" cy="32" r="26" />
+            <circle class="ring-fill" id="daily-ring-circle" cx="32" cy="32" r="26" />
+          </svg>
+          <div class="ring-info">
+            <span class="ring-percent" id="daily-percent">0%</span>
+            <span class="ring-caption" id="daily-count-label">0 of 0 today</span>
+          </div>
+        </div>
+
+        <div class="stat-pill">
+          <span class="stat-label">Best Streak</span>
+          <span class="stat-value" id="best-streak-val">0d</span>
+        </div>
+
+        <div class="stat-pill">
+          <span class="stat-label">Total Check-ins</span>
+          <span class="stat-value" id="total-checkins-val">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Add Habit Bar -->
+    <section class="add-habit-card" aria-label="Add new habit">
+      <form id="add-habit-form" class="add-form">
+        <div class="icon-picker" id="icon-picker" role="radiogroup" aria-label="Choose icon">
+          <button type="button" class="icon-btn selected" data-icon="💧">💧</button>
+          <button type="button" class="icon-btn" data-icon="🏃">🏃</button>
+          <button type="button" class="icon-btn" data-icon="📚">📚</button>
+          <button type="button" class="icon-btn" data-icon="🧘">🧘</button>
+          <button type="button" class="icon-btn" data-icon="💻">💻</button>
+          <button type="button" class="icon-btn" data-icon="🥗">🥗</button>
+        </div>
+
+        <input
+          type="text"
+          id="habit-name-input"
+          placeholder="New habit (e.g. Read 20 pages, Hydrate, Meditate)..."
+          maxlength="40"
+          required
+        />
+
+        <div class="color-picker" id="color-picker" role="radiogroup" aria-label="Choose color">
+          <button type="button" class="color-swatch selected" data-color="#38bdf8" style="--swatch:#38bdf8"></button>
+          <button type="button" class="color-swatch" data-color="#34d399" style="--swatch:#34d399"></button>
+          <button type="button" class="color-swatch" data-color="#a78bfa" style="--swatch:#a78bfa"></button>
+          <button type="button" class="color-swatch" data-color="#f472b6" style="--swatch:#f472b6"></button>
+          <button type="button" class="color-swatch" data-color="#fbbf24" style="--swatch:#fbbf24"></button>
+        </div>
+
+        <button type="submit" class="btn-add">+ Add Habit</button>
+      </form>
+    </section>
+
+    <!-- Weekly Matrix Table -->
+    <section class="matrix-card" aria-label="Weekly Habit Tracker">
+      <div class="matrix-header" id="matrix-header">
+        <!-- Populated by app.js -->
+      </div>
+      <div class="habits-list" id="habits-list">
+        <!-- Populated by app.js -->
+      </div>
+    </section>
+
+    <!-- 28-Day Consistency Heatmap -->
+    <section class="heatmap-card" aria-label="28-Day Consistency Heatmap">
+      <div class="heatmap-header">
+        <h2>Last 28 Days Activity</h2>
+        <div class="heatmap-legend">
+          <span>Less</span>
+          <span class="legend-box lvl-0"></span>
+          <span class="legend-box lvl-1"></span>
+          <span class="legend-box lvl-2"></span>
+          <span class="legend-box lvl-3"></span>
+          <span class="legend-box lvl-4"></span>
+          <span>More</span>
+        </div>
+      </div>
+      <div class="heatmap-grid" id="heatmap-grid">
+        <!-- Populated by app.js -->
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

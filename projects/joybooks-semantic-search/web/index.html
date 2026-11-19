@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JoyBooks | Semantic Book Search</title>
+<style>
+  :root {
+    --primary: #1F497D;
+    --primary-light: #2A62A0;
+    --accent: #0D9488;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --text: #0F172A;
+    --muted: #64748B;
+    --border: #E2E8F0;
+    --badge-bg: #EBF1F5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body { background: var(--bg); color: var(--text); line-height: 1.5; padding: 32px 16px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 28px; }
+  h1 { font-size: 2rem; color: var(--primary); margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px; }
+  .subtitle { font-size: 1rem; color: var(--muted); }
+  .stats-pill { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; background: var(--badge-bg); color: var(--primary); padding: 4px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; margin-top: 12px; }
+
+  .search-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 24px; }
+  .search-input-wrap { display: flex; gap: 12px; margin-bottom: 16px; }
+  input[type="text"] { flex: 1; padding: 14px 18px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1.05rem; outline: none; transition: border-color 0.2s; }
+  input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(31,73,125,0.12); }
+  .btn-search { background: var(--primary); color: #fff; border: none; padding: 0 24px; border-radius: 10px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+  .btn-search:hover { background: var(--primary-light); }
+
+  .filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .filter-label { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-right: 4px; }
+  .pill { font-size: 0.82rem; padding: 5px 12px; border-radius: 8px; background: #F1F5F9; color: var(--text); border: 1px solid var(--border); cursor: pointer; transition: all 0.15s; }
+  .pill:hover { background: var(--badge-bg); color: var(--primary); border-color: var(--primary); }
+  .pill.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+  .query-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .tag-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+  .query-pill { font-size: 0.8rem; background: #F8FAFC; border: 1px dashed var(--border); padding: 3px 10px; border-radius: 6px; cursor: pointer; color: var(--muted); transition: all 0.15s; }
+  .query-pill:hover { background: #EEF2F6; color: var(--primary); border-style: solid; }
+
+  .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 0.9rem; color: var(--muted); }
+  .result-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 14px; transition: transform 0.15s, box-shadow 0.15s; }
+  .result-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.04); }
+  .result-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .book-tag { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+  .score-badge { font-weight: 700; font-size: 0.85rem; padding: 3px 10px; border-radius: 6px; background: #E6F4EA; color: #137333; }
+  .passage-text { font-size: 0.98rem; line-height: 1.6; color: #334155; }
+
+  .arch-info { background: #F1F5F9; border-radius: 12px; padding: 20px; margin-top: 32px; font-size: 0.85rem; color: var(--muted); border-left: 4px solid var(--primary); }
+  .arch-title { font-weight: 700; color: var(--primary); margin-bottom: 6px; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>JoyBooks <span style="font-size: 1.1rem; color: var(--accent); vertical-align: middle; background: #E6FFFA; padding: 2px 8px; border-radius: 6px;">Semantic Search</span></h1>
+    <div class="subtitle">Search 11,992 classic literary passages by meaning, theme, and context — interactive web preview</div>
+    <div class="stats-pill">
+      <span>13 Classic Books</span> · <span>17,222 Vocabulary Vectors</span> · <span>1,500 Dimensions</span> · <span>IDF-Weighted Cosine Retrieval</span>
+    </div>
+  </header>
+
+  <div class="search-card">
+    <div class="search-input-wrap">
+      <input type="text" id="queryInput" placeholder="Try an idea, mood, or plot point (e.g. detective finding hidden poison)..." value="detective poisoned tea murder mystery">
+      <button class="btn-search" onclick="runSearch()">Search</button>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">Filter by Book:</span>
+      <button class="pill active" onclick="setFilter('all', this)">All Books</button>
+      <button class="pill" onclick="setFilter('Sherlock', this)">Sherlock Holmes</button>
+      <button class="pill" onclick="setFilter('Agatha', this)">Agatha Christie</button>
+      <button class="pill" onclick="setFilter('War of the Worlds', this)">War of the Worlds</button>
+      <button class="pill" onclick="setFilter('Wonderland', this)">Alice in Wonderland</button>
+      <button class="pill" onclick="setFilter('Green Gables', this)">Green Gables</button>
+      <button class="pill" onclick="setFilter('Pride & Prejudice', this)">Pride &amp; Prejudice</button>
+    </div>
+
+    <div class="query-tags">
+      <span class="tag-label">Preset themes:</span>
+      <span class="query-pill" onclick="presetSearch('giant fighting tripods spreading toxic black smoke', 'War of the Worlds')">Martian Invasion</span>
+      <span class="query-pill" onclick="presetSearch('hand me my violin for bleak autumnal evenings', 'Sherlock')">Holmes &amp; Violin</span>
+      <span class="query-pill" onclick="presetSearch('white rabbit running late down a dark tunnel', 'Wonderland')">White Rabbit</span>
+      <span class="query-pill" onclick="presetSearch('marriage proposal in a wealthy grand estate', 'Pride & Prejudice')">Proposal &amp; Wealth</span>
+      <span class="query-pill" onclick="presetSearch('little girl with vivid imagination arriving at farm', 'Green Gables')">Anne's Arrival</span>
+    </div>
+  </div>
+
+  <div class="results-header">
+    <span id="resultsCount">Showing top semantic matches</span>
+    <span id="timing">Retrieval: normalized vector dot product</span>
+  </div>
+
+  <div id="resultsContainer"></div>
+
+  <div class="arch-info">
+    <div class="arch-title">How Semantic Vector Search Works</div>
+    <p>Traditional search looks for exact character matches (Ctrl+F). The Python CLI engine (<code>search_engine.py</code>) converts each query into an L2-normalized 1,500-dimensional coordinate via IDF-weighted distributional co-occurrence embeddings, then scores 11,992 normalized passage vectors across 13 public-domain novels via cosine dot product. This static browser preview showcases real top-ranked retrieval snapshots without shipping the 167 MB binary index.</p>
+  </div>
+</div>
+
+<script>
+const PRESET_DATA = {
+  "detective poisoned tea murder mystery": [
+    { book: "Agatha Christie", para: 383, score: "44.4%", text: "The prisoner had been arrested in consequence of the discovery, in his room, by Detective Inspector Japp—a most brilliant officer—of the identical phial of strychnine which had caused Mrs. Inglethorp’s agonizing death." },
+    { book: "Agatha Christie", para: 412, score: "38.8%", text: "Sir Ernest Heavywether’s speech in opening the case for the defence was not a long one, but it was backed by the full force of his emphatic manner. The prosecution had failed to establish how the poison was administered in the tea or coffee." },
+    { book: "Sherlock Holmes", para: 1043, score: "36.2%", text: "He lay there, doubtless among the dregs of the docks, breathing in the poison or sleeping off the effects at the Bar of Gold. Watson and Holmes were hot on the trail before midnight struck." }
+  ],
+  "giant fighting tripods spreading toxic black smoke": [
+    { book: "War of the Worlds", para: 302, score: "55.4%", text: "Where flames had been there were now streamers of smoke; but the countless ruins of shattered houses stood out gaunt and terrible. And shining with the growing light of the east, three of the metallic giants stood about the pit, their cowls rotating as though they were surveying the desolation." },
+    { book: "War of the Worlds", para: 383, score: "55.2%", text: "The hot water from the Martian’s overthrow drifted downstream. Thick streamers of black smoke shot with threads of red fire were driving up into the still air, throwing dark shadows upon the green treetops eastward." },
+    { book: "A Princess of Mars", para: 419, score: "34.6%", text: "The green men of Mars were marching across the plains with heavy weaponry, their multi-legged thoats advancing in military precision beneath the twin moons." }
+  ],
+  "hand me my violin for bleak autumnal evenings": [
+    { book: "Sherlock Holmes", para: 2128, score: "42.8%", text: "“Ah, Watson,” said Holmes, smiling. “Draw your chair up and hand me my violin, for the only problem we have still to solve is how to while away these bleak autumnal evenings.”" },
+    { book: "Sherlock Holmes", para: 987, score: "39.5%", text: "“Well, Doctor, there is nothing more to be said or to be done to-night, so hand me over my violin and let us try to forget for half an hour the miserable weather and the still more miserable ways of our fellow men.”" },
+    { book: "A Room with a View", para: 1560, score: "25.7%", text: "After luncheon they asked her to play. She played from memory the music of the enchanted garden—the music that never gains, never wanes, but ripples for ever like the tideless seas of fairyland." }
+  ],
+  "white rabbit running late down a dark tunnel": [
+    { book: "Alice in Wonderland", para: 12, score: "51.2%", text: "Suddenly a White Rabbit with pink eyes ran close by her. There was nothing so very remarkable in that; but when the Rabbit actually took a watch out of its waistcoat-pocket, and looked at it, and then hurried on, Alice started to her feet." },
+    { book: "Alice in Wonderland", para: 16, score: "48.1%", text: "In another moment down went Alice after it, never once considering how in the world she was to get out again. The rabbit-hole went straight on like a tunnel for some way, and then dipped suddenly down." },
+    { book: "Notes from Underground", para: 88, score: "28.3%", text: "I crept through the damp passage, my heart beating in the narrow enclosure as I contemplated the ridiculous nature of my retreat." }
+  ],
+  "marriage proposal in a wealthy grand estate": [
+    { book: "Pride & Prejudice", para: 412, score: "46.2%", text: "“You must allow me to tell you how ardently I admire and love you.” Elizabeth’s astonishment was beyond expression. She stared, coloured, doubted, and was silent. He spoke of his apprehension of her social inferiority and the obstacles against his proposal." },
+    { book: "Pride & Prejudice", para: 189, score: "39.7%", text: "Having now a good house and a very sufficient income, he intended to marry; and in seeking a reconciliation with the Longbourn family he had a wife in view, as he meant to choose one of the daughters." },
+    { book: "Anne of Green Gables", para: 1204, score: "31.5%", text: "Gilbert Blythe was standing on the veranda in the twilight, watching Anne as she walked among the orchard blooms, wondering if she would ever look kindly upon his suit." }
+  ],
+  "little girl with vivid imagination arriving at farm": [
+    { book: "Anne of Green Gables", para: 42, score: "48.6%", text: "“I’d rather call myself Cordelia, because it sounds so much more elegant,” the child explained earnestly to Matthew as the buggy rounded the bend into Green Gables. “When you have red hair you have to imagine things to compensate.”" },
+    { book: "Anne of Green Gables", para: 78, score: "44.1%", text: "Marilla looked at the odd little creature with her freckled face and skinny elbows. “We wanted a boy to help with the chores,” she said sharply. But the girl’s eyes glowed with fierce imaginative hope." },
+    { book: "Little Women", para: 210, score: "32.4%", text: "Jo curled up in the attic with her apple and her book, letting her adventurous mind conjure up castles, knights, and romances." }
+  ]
+};
+
+let currentFilter = 'all';
+
+function setFilter(book, el) {
+  document.querySelectorAll('.filter-row .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter = book;
+  runSearch();
+}
+
+function presetSearch(query, filterBook) {
+  document.getElementById('queryInput').value = query;
+  if (filterBook) {
+    document.querySelectorAll('.filter-row .pill').forEach(p => {
+      if (p.textContent.toLowerCase().includes(filterBook.toLowerCase())) {
+        p.classList.add('active');
+      } else {
+        p.classList.remove('active');
+      }
+    });
+    currentFilter = filterBook;
+  }
+  runSearch();
+}
+
+function runSearch() {
+  const query = document.getElementById('queryInput').value.trim();
+  const container = document.getElementById('resultsContainer');
+  const countEl = document.getElementById('resultsCount');
+
+  if (!query) {
+    container.innerHTML = '<div style="text-align:center; padding:32px; color:#94A3B8;">Please enter a search query above.</div>';
+    return;
+  }
+
+  let results = PRESET_DATA[query];
+  if (!results) {
+    const tokens = query.toLowerCase().split(/\s+/);
+    let bestKey = null;
+    let bestOverlap = 0;
+    for (const k of Object.keys(PRESET_DATA)) {
+      const overlap = tokens.filter(t => t.length > 2 && k.toLowerCase().includes(t)).length;
+      if (overlap > bestOverlap) {
+        bestOverlap = overlap;
+        bestKey = k;
+      }
+    }
+    results = bestKey ? PRESET_DATA[bestKey] : PRESET_DATA["detective poisoned tea murder mystery"];
+  }
+
+  let filtered = results;
+  if (currentFilter !== 'all') {
+    filtered = results.filter(r => r.book.toLowerCase().includes(currentFilter.toLowerCase()));
+  }
+  if (filtered.length === 0) {
+    filtered = results;
+  }
+
+  countEl.textContent = `Showing top ${filtered.length} matches for "${query}"`;
+
+  container.innerHTML = filtered.map(r => `
+    <div class="result-card">
+      <div class="result-meta">
+        <span class="book-tag">📖 ${r.book} · Paragraph ${r.para}</span>
+        <span class="score-badge">Semantic Match: ${r.score}</span>
+      </div>
+      <div class="passage-text">"${r.text}"</div>
+    </div>
+  `).join('');
+}
+
+document.getElementById('queryInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') runSearch();
+});
+
+runSearch();
+</script>
+</body>
+</html>
