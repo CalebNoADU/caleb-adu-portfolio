@@ -2,10 +2,11 @@
 
 [![Portfolio CI](https://github.com/CalebNoADU/caleb-adu-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/CalebNoADU/caleb-adu-portfolio/actions/workflows/ci.yml)
 [![Live Portfolio Hub](https://img.shields.io/badge/Live_Demos-GitHub_Pages-38bdf8?style=flat)](https://calebnoadu.github.io/caleb-adu-portfolio/)
+[![CV PDF](https://img.shields.io/badge/CV-Download_PDF-948A54?style=flat)](https://calebnoadu.github.io/caleb-adu-portfolio/Caleb_Adu_CV.pdf)
 
 MSc Computer Science student (Queen Mary University of London) with a background in Economics & Management (BA Hons, 2:1) and technical troubleshooting at Apple. I build across **embedded ARM7TDMI C**, **Python & SQL/Vector retrieval systems**, and **offline-first web applications & game engines**.
 
-> **Live Interactive Portfolio Hub:** [calebnoadu.github.io/caleb-adu-portfolio](https://calebnoadu.github.io/caleb-adu-portfolio/) — launch **5 playable/interactive web apps** directly in your browser.
+> **Live Interactive Portfolio Hub:** [calebnoadu.github.io/caleb-adu-portfolio](https://calebnoadu.github.io/caleb-adu-portfolio/) · **CV:** [Download CV (PDF)](Caleb_Adu_CV.pdf) *(redacted public edition)*
 
 ---
 
