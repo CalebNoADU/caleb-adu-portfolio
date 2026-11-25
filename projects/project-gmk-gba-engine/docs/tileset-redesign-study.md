@@ -4,21 +4,16 @@ A visual architecture and GBA `4bpp` tileset design study for **Project GMK**, e
 
 ---
 
-## 1. Visual Progression: Early Concept → Detailed Overworld Redesign
+## 1. Overworld Spatial Architecture & DMG Palette Study
 
-| Early Layout Concept | Detailed Brutalist Overworld Redesign |
-| :---: | :---: |
-| ![Early GMK Overworld Concept](../assets/gmk-concept-early.png) | ![Detailed Brutalist Overworld Redesign](../assets/overworld-brutalist-redesign.png) |
+![GMK Overworld Concept](../assets/gmk-concept-early.png)
 
-### Key Structural Upgrades
-1. **9-Slice Terrain Transitions**: Replaced flat uniform ground blocks with curbed sidewalks, cobblestone civic plaza paving, and crosswalk striping.
+### Key Design Principles
+1. **9-Slice Terrain Transitions**: Using curbed sidewalks, cobblestone civic plaza paving, and crosswalk striping instead of flat uniform ground blocks.
 2. **Multi-Section Industrial & Residential Roofs**:
    - Northern tenement blocks with tiled ridge slopes, rooftop HVAC units, vertical pilaster piers, deep-set dual-pane windows with 45° glass highlights, and striped awnings.
-   - East factory roofline using corrugated steel decking, skylight monitors, exhaust fans, and an elevated water tower.
-   - West perimeter seawall with concrete buttress columns and vertical expansion seams.
-3. **Contextual Clutter Vignettes**:
-   - **Central Civic Plaza**: 32×32 (2×2 metatile) octagonal stone fountain, volumetric shade trees, benches, and cobblestone borders.
-   - **Logistics Bay**: Plan-oblique delivery kei truck, stacked wooden cargo crates, utility poles, bike racks, and signage.
+   - Industrial perimeter structures using corrugated steel decking, skylight monitors, exhaust fans, and concrete buttress walls.
+3. **Contextual Clutter Vignettes**: Grouping props into functional zones (entrances, civic plazas, and logistics bays) within GBA metatile limits.
 
 ---
 

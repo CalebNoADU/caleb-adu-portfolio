@@ -28,9 +28,9 @@ MSc Computer Science student (Queen Mary University of London) with a background
 
 Alongside software engineering coursework, I build low-level Game Boy Advance (ARM7TDMI) engine mechanics and custom brutalist `4bpp` pixel-art tilesets as part of my technical content creation projects:
 
-| Early Concept Layout | Brutalist DMG Overworld Redesign | Interior Room (`208×160` / `4bpp`) |
+| Brutalist Overworld Concept | Interior Room (`208×160`) | GBA `8×8` `4bpp` Hardware Tileset |
 | :---: | :---: | :---: |
-| ![Early Concept](projects/project-gmk-gba-engine/assets/gmk-concept-early.png) | ![Overworld Redesign](projects/project-gmk-gba-engine/assets/overworld-brutalist-redesign.png) | ![Interior Room](projects/project-gmk-gba-engine/assets/interior-full-room-208x160.png) |
+| ![Overworld Concept](projects/project-gmk-gba-engine/assets/gmk-concept-early.png) | ![Interior Room](projects/project-gmk-gba-engine/assets/interior-full-room-208x160.png) | ![8x8 4bpp Tileset](projects/project-gmk-gba-engine/assets/interior-tileset-8x8-4bpp.png) |
 
 - **Flash Sector 31 Persistence ([gmk_permadeath.c](projects/project-gmk-gba-engine/src/gmk_permadeath.c))**: Persists a magic-header (`0x474D4B31`), checksummed bitmask of unlocked operatives in GBA Flash Sector 31 while cleanly wiping campaign slots `0–29` on permadeath.
 - **Hardware Crash Postmortem ([architecture-and-postmortem.md](projects/project-gmk-gba-engine/docs/architecture-and-postmortem.md))**: Diagnosed and resolved an ARM data abort caused by out-of-bounds indexing into `sAnimTable_Standard[20]` when NPC sprites triggered running animations.

@@ -5,9 +5,9 @@ Original C systems modules, hardware crash postmortems, build-pipeline optimizat
 > **IP Notice**: Contains **100% original C source files, engineering docs, and custom artwork**. Zero Nintendo ROMs, base decompilation codebases, or copyrighted game assets are included.
 
 ## Visual Progression & Custom `4bpp` Art
-| Early Layout Concept | Brutalist DMG Overworld Redesign | Interior Room (`208×160`) |
+| Brutalist Overworld Concept | Interior Room (`208×160`) | GBA `8×8` `4bpp` Hardware Tileset |
 | :---: | :---: | :---: |
-| ![Early Concept](assets/gmk-concept-early.png) | ![Overworld Redesign](assets/overworld-brutalist-redesign.png) | ![Interior Room](assets/interior-full-room-208x160.png) |
+| ![Overworld Concept](assets/gmk-concept-early.png) | ![Interior Room](assets/interior-full-room-208x160.png) | ![8x8 4bpp Tileset](assets/interior-tileset-8x8-4bpp.png) |
 
 ## Included Modules & Technical Writeups
 - **[src/gmk_permadeath.c](src/gmk_permadeath.c) & [include/gmk_permadeath.h](include/gmk_permadeath.h)** — True roguelike permadeath implementation on GBA hardware:
